@@ -13,7 +13,7 @@ test("S01: shows the camera permission prompt on first load", async ({ page }) =
 
   await expect(page.getByText("Camera access")).toBeVisible();
   await expect(
-    page.getByText("This app needs your camera to show the live preview and take photos or videos.")
+    page.getByText("Frankframe needs your camera to show the live preview and take photos or videos.")
   ).toBeVisible();
   const allowButton = page.getByRole("button", { name: "Allow access" });
   await expect(allowButton).toBeVisible();

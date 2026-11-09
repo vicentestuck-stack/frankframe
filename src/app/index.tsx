@@ -62,7 +62,7 @@ export default function CameraScreen() {
     return (
       <PermissionPrompt
         title="Camera access"
-        body="This app needs your camera to show the live preview and take photos or videos."
+        body="Frankframe needs your camera to show the live preview and take photos or videos."
         canAskAgain={cameraPermission.canAskAgain}
         onRequest={requestCameraPermission}
       />
@@ -73,7 +73,7 @@ export default function CameraScreen() {
     return (
       <PermissionPrompt
         title="Microphone access"
-        body="Recording video with sound needs microphone access. You can still take photos without it."
+        body="Video with sound needs microphone access — you can still take photos without it."
         canAskAgain={micPermission.canAskAgain}
         onRequest={requestMicPermission}
       />
@@ -162,7 +162,7 @@ export default function CameraScreen() {
               lenses={lenses}
               selectedId={selectedLens?.id ?? null}
               onSelect={handleLensSelect}
-              onLockedPress={(lens) => setLockedNotice(`${lens.name} is a premium lens.`)}
+              onLockedPress={(lens) => setLockedNotice(`${lens.name} needs Frankframe Plus.`)}
             />
           </Pressable>
 
@@ -196,7 +196,7 @@ export default function CameraScreen() {
               handleLensSelect(l);
               setSheet("none");
             }}
-            onLockedPress={(lens) => setLockedNotice(`${lens.name} is a premium lens.`)}
+            onLockedPress={(lens) => setLockedNotice(`${lens.name} needs Frankframe Plus.`)}
           />
         </Sheet>
       </Modal>

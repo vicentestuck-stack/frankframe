@@ -11,11 +11,11 @@ export const theme = {
     borderInput: "#6B7078",
     text: "#F5F6F7",
     textMuted: "#9AA0A8",
-    accent: "#3D5CE0",
+    accent: "#C14F1E",
     onAccent: "#FFFFFF",
     danger: "#FF5A5F",
     success: "#33D69F",
-    warning: "#F5A524",
+    warning: "#E8A317",
   },
   overlay: {
     scrimTop: "rgba(0,0,0,0.35)",

@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "camera-clone-app",
-    "slug": "camera-clone-app",
+    "name": "Frankframe",
+    "slug": "frankframe",
     "version": "1.0.0",
-    "scheme": "cameracloneapp",
+    "scheme": "frankframe",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
