@@ -55,7 +55,7 @@ export default function CameraScreen() {
   }, []);
 
   if (!cameraPermission || !micPermission) {
-    return <View style={styles.root} />;
+    return <View style={styles.root} role="main" />;
   }
 
   if (!cameraPermission.granted) {
@@ -125,7 +125,7 @@ export default function CameraScreen() {
   }
 
   return (
-    <View style={styles.root}>
+    <View style={styles.root} role="main">
       <CameraView
         ref={cameraRef}
         style={StyleSheet.absoluteFill}

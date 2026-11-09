@@ -60,7 +60,7 @@ export default function ShareScreen() {
   }
 
   return (
-    <View style={styles.root}>
+    <View style={styles.root} role="main">
       <View style={styles.preview}>
         {params.type === "photo" ? (
           <Image source={{ uri: params.uri }} style={StyleSheet.absoluteFill} resizeMode="cover" />

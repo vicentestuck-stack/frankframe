@@ -10,7 +10,7 @@ const ROWS = [
 
 export default function SettingsScreen() {
   return (
-    <View style={styles.root}>
+    <View style={styles.root} role="main">
       {ROWS.map((row) => (
         <View key={row} style={styles.row}>
           <Text style={styles.label}>{row}</Text>
