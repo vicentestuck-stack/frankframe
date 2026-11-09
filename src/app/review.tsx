@@ -4,6 +4,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { theme } from "@/lib/theme";
 import { Button } from "@/components/Button";
 import { LensTintOverlay } from "@/components/LensTintOverlay";
+import { ArStickerOverlay } from "@/components/ArStickerOverlay";
 import { getActiveBeautyPreset, getLensById } from "@/lib/data/store";
 import type { BeautyPreset, Lens } from "@/lib/data/types";
 import { DEFAULT_BEAUTY } from "@/lib/data/types";
@@ -37,6 +38,8 @@ export default function ReviewScreen() {
     <View style={styles.root} role="main">
       <View style={styles.preview}>
         {params.type === "photo" ? (
+          // Already graded per-pixel at capture time (src/lib/bakeGrading.ts) —
+          // shown as-is, not re-filtered, so the preview matches the saved file.
           <Image source={{ uri: params.uri }} style={StyleSheet.absoluteFill} resizeMode="cover" />
         ) : (
           <View style={[StyleSheet.absoluteFill, styles.videoPlaceholder]}>
@@ -49,7 +52,8 @@ export default function ReviewScreen() {
             </Text>
           </View>
         )}
-        <LensTintOverlay lens={lens} beauty={beauty} />
+        {params.type === "video" ? <LensTintOverlay lens={lens} beauty={beauty} /> : null}
+        <ArStickerOverlay lens={lens} />
       </View>
 
       <View style={styles.actions}>

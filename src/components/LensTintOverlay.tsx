@@ -1,14 +1,16 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import type { BeautyPreset, Lens } from "@/lib/data/types";
 
 /**
- * Visual approximation of a filter/lens/beauty preset, drawn as flat colour
- * overlays on top of the live preview or the review photo. This is NOT the
- * real pipeline: no face tracking, no per-pixel colour grading, the AR
- * sticker is not anchored to a face. See replica/build-log.md and
- * replica/architecture.md's "parts that bite" — that work needs a native
- * frame-processor module. This overlay exists so the lens picker and beauty
- * sliders have something visible to react to in this slice.
+ * Flat-colour approximation of a filter/beauty preset, used ONLY for the
+ * live camera viewfinder (src/app/index.tsx). Skia can grade pixels it
+ * draws itself but not a sibling native CameraView, so a genuinely
+ * real-time per-pixel graded viewfinder needs a native frame-processor
+ * module (see src/lib/colorGrading.ts's header) — out of reach without a
+ * real device/dev build. Captured photos and the review screen no longer
+ * use this: they get real per-pixel Skia grading, see
+ * src/components/GradedPhoto.tsx and src/lib/bakeGrading.ts. The AR sticker
+ * itself lives in src/components/ArStickerOverlay.tsx.
  */
 export function LensTintOverlay({
   lens,
@@ -31,16 +33,6 @@ export function LensTintOverlay({
       {lens?.tint ? (
         <View style={[StyleSheet.absoluteFill, { backgroundColor: lens.tint, opacity: 0.16 }]} />
       ) : null}
-      {lens?.category === "ar_sticker" ? (
-        <View style={styles.stickerWrap}>
-          <Text style={styles.sticker}>{lens.thumbnailEmoji}</Text>
-        </View>
-      ) : null}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  stickerWrap: { flex: 1, alignItems: "center", paddingTop: 48 },
-  sticker: { fontSize: 72 },
-});

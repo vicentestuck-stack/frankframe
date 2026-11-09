@@ -19,6 +19,7 @@ export default function RootLayout() {
         <Stack.Screen name="edit" options={{ title: "Edit" }} />
         <Stack.Screen name="share" options={{ title: "Save & share" }} />
         <Stack.Screen name="settings" options={{ title: "Settings" }} />
+        <Stack.Screen name="sign-in" options={{ title: "Sign in" }} />
       </Stack>
     </>
   );

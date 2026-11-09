@@ -23,8 +23,10 @@ import { ModeSwitch } from "@/components/ModeSwitch";
 import { IconToggle } from "@/components/IconToggle";
 import { PermissionPrompt } from "@/components/PermissionPrompt";
 import { LensTintOverlay } from "@/components/LensTintOverlay";
+import { ArStickerOverlay } from "@/components/ArStickerOverlay";
 import { Button } from "@/components/Button";
 import { getActiveBeautyPreset, getLenses, saveActiveBeautyPreset } from "@/lib/data/store";
+import { bakeGradingIntoPhoto } from "@/lib/bakeGrading";
 import type { BeautyPreset, Lens } from "@/lib/data/types";
 import { DEFAULT_BEAUTY } from "@/lib/data/types";
 
@@ -97,7 +99,8 @@ export default function CameraScreen() {
     if (!cameraRef.current) return;
     const photo = await cameraRef.current.takePictureAsync({ quality: 0.9 });
     if (!photo) return;
-    goToReview(photo.uri, "photo", null);
+    const gradedUri = await bakeGradingIntoPhoto(photo.uri, beauty, selectedLens);
+    goToReview(gradedUri, "photo", null);
   }
 
   async function toggleVideo() {
@@ -135,6 +138,7 @@ export default function CameraScreen() {
         mute={false}
       />
       <LensTintOverlay lens={selectedLens} beauty={beauty} />
+      <ArStickerOverlay lens={selectedLens} />
 
       <SafeAreaView style={styles.overlay}>
         <View style={styles.topBar}>
