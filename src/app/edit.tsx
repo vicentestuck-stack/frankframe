@@ -3,6 +3,7 @@ import { Image, Pressable, StyleSheet, Text, TextInput, View } from "react-nativ
 import { router, useLocalSearchParams } from "expo-router";
 import { theme } from "@/lib/theme";
 import { Button } from "@/components/Button";
+import { safeGoBack } from "@/lib/navigation";
 
 const COMING_SOON_TOOLS = ["Crop", "Sticker", "Draw", "Trim"];
 
@@ -30,7 +31,7 @@ export default function EditScreen() {
   }
 
   return (
-    <View style={styles.root}>
+    <View style={styles.root} role="main">
       <View style={styles.preview}>
         {params.type === "photo" ? (
           <Image source={{ uri: params.uri }} style={StyleSheet.absoluteFill} resizeMode="cover" />
@@ -46,7 +47,7 @@ export default function EditScreen() {
         ) : null}
       </View>
 
-      <View style={styles.toolbar} accessibilityRole="list">
+      <View style={styles.toolbar} accessibilityRole="toolbar">
         <ToolButton label="Text" active onPress={() => {}} />
         {COMING_SOON_TOOLS.map((tool) => (
           <ToolButton key={tool} label={tool} onPress={() => setNotice(`${tool} is coming soon.`)} />
@@ -72,7 +73,7 @@ export default function EditScreen() {
       ) : null}
 
       <View style={styles.actions}>
-        <Button label="Back" variant="secondary" onPress={() => router.back()} style={styles.action} />
+        <Button label="Back" variant="secondary" onPress={safeGoBack} style={styles.action} />
         <Button label="Done" onPress={goToShare} style={styles.action} />
       </View>
     </View>

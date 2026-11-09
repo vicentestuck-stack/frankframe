@@ -7,6 +7,7 @@ import { LensTintOverlay } from "@/components/LensTintOverlay";
 import { getActiveBeautyPreset, getLensById } from "@/lib/data/store";
 import type { BeautyPreset, Lens } from "@/lib/data/types";
 import { DEFAULT_BEAUTY } from "@/lib/data/types";
+import { safeGoBack } from "@/lib/navigation";
 
 export default function ReviewScreen() {
   const params = useLocalSearchParams<{
@@ -33,7 +34,7 @@ export default function ReviewScreen() {
   }
 
   return (
-    <View style={styles.root}>
+    <View style={styles.root} role="main">
       <View style={styles.preview}>
         {params.type === "photo" ? (
           <Image source={{ uri: params.uri }} style={StyleSheet.absoluteFill} resizeMode="cover" />
@@ -52,7 +53,7 @@ export default function ReviewScreen() {
       </View>
 
       <View style={styles.actions}>
-        <Button label="Retake" variant="secondary" onPress={() => router.back()} style={styles.action} />
+        <Button label="Retake" variant="secondary" onPress={safeGoBack} style={styles.action} />
         <Button label="Use this" onPress={goToEdit} style={styles.action} />
       </View>
     </View>
